@@ -113,6 +113,17 @@ async def on_raw_reaction_remove(payload):
         pubg = get(member.guild.roles, name="🎮 | Pubg")
         await member.remove_roles(pubg)
 
+        
+@client.event
+async def on_message(message):
+   if 'https://' in message.content:
+      await message.delete()
+      await message.channel.send(f"{message.author.mention} Sunucumuzda reklam yasaktır!")
+   elif 'http://' in message.content:
+       await message.delete()
+       await message.channel.send(f"{message.author.mention} Sunucumuzda reklam yasaktır!")
+   else:
+      await client.process_commands(message)
 
 
 token = "" #enter your token here
